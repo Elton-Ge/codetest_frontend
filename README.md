@@ -2,13 +2,13 @@
 
 ## tech stacks
 
-* create-react-app
-* react.js
-* ant design
+* Create-react-app
+* React.js
+* Ant design
 * Pub-Sub.js
 * Axios
-* http-proxy-middleware
-* less
+* Http-proxy-middleware
+* Less
 
 ## it support the below function
 * Get all the results from mongodb remote server
