@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Form, Button, Select } from "antd";
 import PubSub from 'pubsub-js'
 import axios from "axios";
 
-export default class Search extends Component {
+export default class Search extends PureComponent {
   state = {
-    componentSize: "default",
+    componentSize: "default"
+    
   };
   onFormLayoutChange = ({ size }) => {
     this.setComponentSize(size);
@@ -14,9 +15,9 @@ export default class Search extends Component {
   search = () => {
     const direction = this.directionOption;
     const timestamp = this.timestampOption;
+    
     //before request
-    PubSub.publish("searchByDirectAndTime", { isLoading: true, searched: true });
-    // this.props.updateAppState({ isLoading: true, searched: true });
+    PubSub.publish("searchByDirectAndTime", { isLoading: true, searched: true ,direction,timestamp });
     //async request
     axios
       .get(`/api1/getLocation?direction=${direction}&timestamp=${timestamp}`)
@@ -26,10 +27,8 @@ export default class Search extends Component {
             isLoading: false,
             result: response.data,
           });
-          // this.props.updateAppState({isLoading: false, result: response.data});
         },
         (error) => {
-          // this.props.updateAppState({ isLoading: false, err: error.message });
           PubSub.publish("searchByDirectAndTime", {
             isLoading: false,
             err: error.message,
@@ -48,8 +47,6 @@ export default class Search extends Component {
           isLoading: false,
           result: response.data,
         });
-        
-        // this.props.updateAppState({isLoading: false, result: response.data});
       },
       (error) => {
         PubSub.publish("searchAll", {
@@ -57,7 +54,6 @@ export default class Search extends Component {
           err: error.message,
         });
 
-        // this.props.updateAppState({ isLoading: false, err: error.message });
       }
     );
   }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PubSub from "pubsub-js";
 import Loading from "../../Loading";
 import { Table } from "antd";
@@ -7,7 +7,7 @@ const columns = [
   {
     title: "Id",
     dataIndex: "_id",
-    key: "_id",
+    key: "id",
   },
   {
     title: "Timestamp",
@@ -31,7 +31,7 @@ const columns = [
   },
 ];
 
-export default class ListAll extends Component {
+export default class ListAll extends PureComponent {
   state = {
     result: [],
     searched: false,
@@ -58,7 +58,7 @@ export default class ListAll extends Component {
         ) : (
           <div>
             <h3 className="text-center mb4 mt4 text-primary">Show All Data </h3>
-            <Table  columns={columns} dataSource={result} />
+            <Table  columns={columns} dataSource={result} rowKey="_id" />
           </div>
         )}
       </div>
