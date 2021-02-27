@@ -25,4 +25,5 @@
 
 ## server port
 * default port : 3000
+* Achieved Proxying API Requests in Development 
 
